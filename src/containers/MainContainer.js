@@ -39,14 +39,21 @@ class MainContainer extends Component {
     this.setState({ portfolioStocks: newStocks })
   }
 
+  setFilter = e => {
+    this.setState({ filter: e.target.value });
+  }
+
+  updateSortMethod = e => {
+    this.setState({ sortMethod: e.target.value });
+  }
+
   getStocks = () => {
-    let stocks = this.filteredStocks();
+    let stocks = [...this.state.stocks]
+    stocks = this.filteredStocks(stocks);
     return this.sortStocks(stocks);
   }
 
-  filteredStocks = () => {
-    const stocks = this.state.stocks;
-
+  filteredStocks = stocks => {
     switch (this.state.filter) {
       case ('Tech'):
         return stocks.filter(stock => stock.type === 'Tech');
@@ -57,14 +64,6 @@ class MainContainer extends Component {
       default:
         return stocks
     }
-  }
-
-  setFilter = e => {
-    this.setState({ filter: e.target.value });
-  }
-
-  updateSortMethod = e => {
-    this.setState({ sortMethod: e.target.value });
   }
 
   sortStocks = stocks => {

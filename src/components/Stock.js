@@ -4,7 +4,10 @@ const Stock = (props) => (
   <div>
 
     <div className="card">
-      <div className="card-body">
+      <div 
+        className="card-body"
+        onClick={() => props.clickStock(props.id)}
+      >
         <h5 className="card-title">{
             //Company Name
             props.name
